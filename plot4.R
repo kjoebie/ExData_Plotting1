@@ -6,6 +6,9 @@ colclasses <- c("character","character","numeric","numeric","numeric","numeric",
 headers <- c("Date", "Time", "Global_active_power","Global_reactive_power","Voltage","Global_intensity","Sub_metering_1","Sub_metering_2","Sub_metering_3")
 
 #read data from 2007-02-01 and 2007-02-02
+#Note: after examining the data first I concluded that the data is ordered. 
+#Therefore I choose to use the technique to skip lines instead of subsetting them.
+
 #first line starts at rownumber 66637 (incl header) so skip the first 66636 lines
 #the first line of 2007-02-03 starts at rownumber 69517, so the last line of 2007-02-02 is at rownumber 69516
 #therefore we can read 69516 - 66636 = 2880 lines to get the whole set we need
@@ -44,5 +47,5 @@ legend("topright", lty=c(1,1), col=c("black", "blue", "red"), legend=c("Sub_mete
 plot(data$DateTime,data$Global_reactive_power, type="l", xlab="datetime", ylab="Global_reactive_power")
 
 #create a .png file
-dev.copy(png, file="plot4.png", height=480, width=480)
+dev.copy(png, file=paste(root,"\\Github\\plot4.png", sep=""), height=480, width=480)
 dev.off()
