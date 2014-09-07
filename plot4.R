@@ -28,6 +28,7 @@ par(mfrow = c(2,2))
 #set the fontsize of label and axis a bit smaller
 par(cex.lab=0.85, cex.axis=0.85)
 
+# write to screen
 #first plot, upper left
 plot(data$DateTime,data$Global_active_power, type="l", xlab="", ylab="Global Active Power")
 
@@ -46,6 +47,29 @@ legend("topright", lty=c(1,1), col=c("black", "blue", "red"), legend=c("Sub_mete
 #fourth plot, lower right
 plot(data$DateTime,data$Global_reactive_power, type="l", xlab="datetime", ylab="Global_reactive_power")
 
-#create a .png file
-dev.copy(png, file=paste(root,"\\Github\\plot4.png", sep=""), height=480, width=480)
+
+
+
+# Create the png file
+png("plot4.png", width = 480, height = 480, units = "px") 
+
+#first plot, upper left
+plot(data$DateTime,data$Global_active_power, type="l", xlab="", ylab="Global Active Power")
+
+#second plot, upper right
+plot(data$DateTime,data$Voltage, type="l", xlab="datetime", ylab="Voltage")
+
+#third plot, lower left
+plot(data$DateTime,data$Sub_metering_1, type="n", xlab="", ylab="Energy sub metering")
+lines(data$DateTime,data$Sub_metering_1, type="l", col="black")
+lines(data$DateTime,data$Sub_metering_2, type="l", col="red")
+lines(data$DateTime,data$Sub_metering_3, type="l", col="blue")
+#make the legendbox a bit smaller: cex=0.75
+#and no line around the legend (boxtype): bty="n"
+legend("topright", lty=c(1,1), col=c("black", "blue", "red"), legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"), cex=0.75,bty="n")
+
+#fourth plot, lower right
+plot(data$DateTime,data$Global_reactive_power, type="l", xlab="datetime", ylab="Global_reactive_power")
+
+#close the .png file
 dev.off()

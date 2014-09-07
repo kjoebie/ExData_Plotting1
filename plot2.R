@@ -2,7 +2,7 @@ root <- "C:/Users/albert.QBIDS/Coursera/Johns Hopkins/The Data Science Track/4 E
 setwd(root)
 
 #make sure we have only 1 graph on the screen
-par(mfrow=c(1,1))
+par(mfrow=c(1,1)) 
 
 datafile <- paste(root,"/household_power_consumption.txt", sep="")
 colclasses <- c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
@@ -28,5 +28,7 @@ data$Time <-  strptime(data$Time, format = "%H:%M:%S")
 plot(data$DateTime,data$Global_active_power, type="l", xlab="", ylab="Global Active Power (kilowatts)")
 
 #create a .png file
-dev.copy(png, file=paste(root,"\\Github\\plot2.png", sep=""), height=480, width=480)
+# store as image of certain size: 480 x 480
+png(filename=".\\Github\\plot2.png")
+plot(data$DateTime,data$Global_active_power, type="l", xlab="", ylab="Global Active Power (kilowatts)")
 dev.off()

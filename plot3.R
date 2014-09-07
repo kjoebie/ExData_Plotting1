@@ -2,7 +2,7 @@ root <- "C:/Users/albert.QBIDS/Coursera/Johns Hopkins/The Data Science Track/4 E
 setwd(root)
 
 #make sure we have only 1 graph on the screen
-par(mfrow=c(1,1))
+par(mfrow=c(1,1)) 
 
 datafile <- paste(root,"/household_power_consumption.txt", sep="")
 colclasses <- c("character","character","numeric","numeric","numeric","numeric","numeric","numeric","numeric")
@@ -32,5 +32,13 @@ lines(data$DateTime,data$Sub_metering_3, type="l", col="blue")
 legend("topright", lty=c(1,1), col=c("black", "blue", "red"), legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
 
 #create a .png file
-dev.copy(png, file=paste(root,"\\Github\\plot3.png", sep=""), height=480, width=480)
+# store as image of certain size: 480 x 480
+png(filename=".\\Github\\plot3.png")
+
+plot(data$DateTime,data$Sub_metering_1, type="n", xlab="", ylab="Energy sub metering")
+lines(data$DateTime,data$Sub_metering_1, type="l", col="black")
+lines(data$DateTime,data$Sub_metering_2, type="l", col="red")
+lines(data$DateTime,data$Sub_metering_3, type="l", col="blue")
+legend("topright", lty=c(1,1), col=c("black", "blue", "red"), legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+
 dev.off()
